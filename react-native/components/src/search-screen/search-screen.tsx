@@ -1,5 +1,5 @@
 import React, { createRef } from 'react';
-import { FlatList, FlatListProps, ListRenderItem, StyleSheet, View } from 'react-native';
+import { Animated, FlatList, FlatListProps, ListRenderItem, StyleSheet, View } from 'react-native';
 import { Header } from '../index';
 import { blue, white } from '@pxblue/colors';
 import { HeaderProps } from '../header/header';
@@ -12,6 +12,7 @@ export interface SearchScreenProps<T> {
 
 interface SearchScreenState {
   query: string;
+  scrollDistance: Animated.Value;
 }
 
 export class SearchScreen<T> extends React.Component<SearchScreenProps<T>, SearchScreenState> {
@@ -21,7 +22,8 @@ export class SearchScreen<T> extends React.Component<SearchScreenProps<T>, Searc
     super(props);
 
     this.state = {
-      query: ''
+      query: '',
+      scrollDistance: new Animated.Value(0)
     }
   }
 
@@ -36,6 +38,8 @@ export class SearchScreen<T> extends React.Component<SearchScreenProps<T>, Searc
 
   private header() {
     const { headerProps } = this.props;
+    const { scrollDistance } = this.state;
+
     return (
       <Header
         {...headerProps}
@@ -43,19 +47,31 @@ export class SearchScreen<T> extends React.Component<SearchScreenProps<T>, Searc
           ...headerProps.searchable,
           onChangeText: text => this.onChangeText(text)
         }}
+        scrollDistance={scrollDistance}
       />
     )
   }
 
   private infoList() {
     const { flatListProps } = this.props;
+    const { scrollDistance } = this.state;
 
     return (
+      <View style={{zIndex: 1, flex: 1, paddingTop: Header.EXTENDED_HEIGHT}}>
       <FlatList
         {...flatListProps}
         style={[flatListProps.style, styles.infoList]}
         data={this.filteredData()}
+        scrollEventThrottle={16}
+        onScroll={Animated.event(
+          [{ nativeEvent: {
+            contentOffset: {
+              y: scrollDistance
+            }
+            }}]
+        )}
       />
+      </View>
     );
   }
 
@@ -84,6 +100,7 @@ export class SearchScreen<T> extends React.Component<SearchScreenProps<T>, Searc
 
 const styles = StyleSheet.create({
   infoList: {
-    flex: 1
+    flex: 1,
+    marginTop: -Header.EXTENDED_HEIGHT,
   }
 });

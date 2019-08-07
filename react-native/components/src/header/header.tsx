@@ -66,13 +66,15 @@ export interface HeaderProps {
 
   /** Configuration object that determines whether the Header can have a search bar */
   searchable?: SearchableConfig;
+
+  scrollDistance?: Animated.Value;
 }
 
 interface HeaderState {
   expanded: boolean;
   searching: boolean;
   query: string;
-  headerHeight: Animated.Value;
+  headerAnimationValue: Animated.Value;
 }
 
 /**
@@ -99,18 +101,35 @@ export class Header extends React.Component<HeaderProps, HeaderState> {
       expanded: false,
       searching: false,
       query: '',
-      headerHeight: new Animated.Value(Header.REGULAR_HEIGHT)
+      headerAnimationValue: new Animated.Value(Header.REGULAR_HEIGHT)
     };
 
-    this.expand = Animated.timing(this.state.headerHeight, {
+    this.expand = Animated.timing(this.state.headerAnimationValue, {
       toValue: Header.EXTENDED_HEIGHT,
       duration: Header.ANIMATION_LENGTH
     });
 
-    this.contract = Animated.timing(this.state.headerHeight, {
+    this.contract = Animated.timing(this.state.headerAnimationValue, {
       toValue: Header.REGULAR_HEIGHT,
       duration: Header.ANIMATION_LENGTH
     });
+  }
+
+  private headerAnimationValue() {
+    const { scrollDistance } = this.props;
+    const { searching } = this.state;
+
+    if (searching) {
+      return this.state.headerAnimationValue;
+    } else if (scrollDistance) {
+      return scrollDistance.interpolate({
+        inputRange: [0, Header.EXTENDED_HEIGHT - Header.REGULAR_HEIGHT],
+        outputRange: [Header.EXTENDED_HEIGHT, Header.REGULAR_HEIGHT],
+        extrapolate: 'clamp'
+      });
+    } else {
+      return this.state.headerAnimationValue;
+    }
   }
 
   render() {
@@ -120,7 +139,11 @@ export class Header extends React.Component<HeaderProps, HeaderState> {
     const contentStyle = this.contentStyle();
 
     return (
-      <TouchableWithoutFeedback onPress={() => this.onPress()} disabled={!expandable || searching}>
+      <TouchableWithoutFeedback
+        onPress={() => this.onPress()}
+        disabled={!expandable || searching}
+        style={{ zIndex: 100}}
+      >
         <AnimatedSafeAreaView style={barStyle}>
           {this.backgroundImage()}
           <Animated.View style={contentStyle}>
@@ -158,8 +181,8 @@ export class Header extends React.Component<HeaderProps, HeaderState> {
           style={{
             position: 'absolute',
             resizeMode: 'cover',
-            height: this.state.headerHeight,
-            opacity: this.state.headerHeight.interpolate({
+            height: this.headerAnimationValue(),
+            opacity: this.headerAnimationValue().interpolate({
               inputRange: [Header.REGULAR_HEIGHT, Header.EXTENDED_HEIGHT],
               outputRange: [0, 0.3]
             })
@@ -293,7 +316,7 @@ export class Header extends React.Component<HeaderProps, HeaderState> {
 
   private barStyle() {
     return [styles.bar, {
-      height: this.state.headerHeight,
+      height: this.headerAnimationValue(),
       backgroundColor: this.backgroundColor()
     }];
   }
@@ -301,7 +324,7 @@ export class Header extends React.Component<HeaderProps, HeaderState> {
   private contentStyle() {
     const contractedPadding = this.props.subtitle ? 8 : 16;
     return [styles.content, {
-      paddingBottom: this.state.headerHeight.interpolate({
+      paddingBottom: this.headerAnimationValue().interpolate({
         inputRange: [Header.REGULAR_HEIGHT, Header.EXTENDED_HEIGHT],
         outputRange: [contractedPadding, 28]
       })
@@ -311,7 +334,7 @@ export class Header extends React.Component<HeaderProps, HeaderState> {
   private titleStyle() {
     return {
       color: this.fontColor(),
-      fontSize: this.state.headerHeight.interpolate({
+      fontSize: this.headerAnimationValue().interpolate({
         inputRange: [Header.REGULAR_HEIGHT, Header.EXTENDED_HEIGHT],
         outputRange: [20, 24]
       })
@@ -322,7 +345,7 @@ export class Header extends React.Component<HeaderProps, HeaderState> {
     return {
       color: this.fontColor(),
       fontWeight: '300',
-      fontSize: this.state.headerHeight.interpolate({
+      fontSize: this.headerAnimationValue().interpolate({
         inputRange: [Header.REGULAR_HEIGHT, Header.EXTENDED_HEIGHT],
         outputRange: [18, 22]
       })
