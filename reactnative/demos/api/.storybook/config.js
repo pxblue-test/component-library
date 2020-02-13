@@ -7,10 +7,27 @@ import 'typeface-open-sans';
 import './styles.css';
 import pxblue from './pxblue-theme';
 
+pxblue.addonNotesTheme = {
+        code: {
+           // color: 'rebeccapurple',
+        },
+        h1: {
+            color: Colors.blue[500]
+        },
+        h2: {
+            color: Colors.blue[500],
+        },
+        imgWrapper: {
+            backgroundColor: 'red'
+        }
+    };
+
 addParameters({
     options: {
         theme: pxblue,
-    }
+    },
+    notes: 'test'
+
 });
 
 addDecorator((storyFn) => (
