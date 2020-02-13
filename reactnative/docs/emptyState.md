@@ -1,4 +1,3 @@
-<div id="api-wrapper">
 # EmptyState
 The EmptyState component is an element that can be used as a placeholder when no data is present (such as an empty list, or a placeholder page for future content). This is only used when no data is available, rather than during loading (see [empty states pattern](https://pxblue.github.io/patterns/empty-states)).
 
@@ -29,4 +28,3 @@ const Battery = wrapIcon({ IconClass: _Battery });
 | iconColor   | The color of the primary icon           | `string`                                           | no       | `text`  | 'red'                           |
 | actions     | Additional components to render below   | `JSX.Element`                                      | no       |         | `<Button title={'click me'} />` |
 | theme       | Theme partial for default styling       | `DeepPartial<Theme>`                               | no       |         | { colors: { text: 'green' } }   |
-</div>
