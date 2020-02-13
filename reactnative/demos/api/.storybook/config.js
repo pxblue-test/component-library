@@ -17,8 +17,8 @@ pxblue.addonNotesTheme = {
         h2: {
             color: Colors.blue[500],
         },
-        imgWrapper: {
-            backgroundColor: 'red'
+        table: {
+            width: '100%'
         }
     };
 

@@ -1,23 +1,30 @@
 # EmptyState
 The EmptyState component is an element that can be used as a placeholder when no data is present (such as an empty list, or a placeholder page for future content). This is only used when no data is available, rather than during loading (see [empty states pattern](https://pxblue.github.io/patterns/empty-states)).
 
-<div class="imgWrapper">
-<img class="wrappedImg" width="500" alt="Empty state with all props" src="./images/emptyState.png">
-</div>
 
 ## Usage
-```typescript
-import { EmptyState, wrapIcon } from '@pxblue/react-native-components';
-import _Battery from '@pxblue/icons-svg/battery.svg';
-const Battery = wrapIcon({ IconClass: _Battery });
-...
-<EmptyState 
-    title={'Nothing Found'} 
-    description={'Not a single thing'}
-    IconClass={Battery} 
-/>
-```
-
+<div class="codeBlock">
+    <div class="imgWrapper codeBlockImage">
+        <img class="wrappedImg" style="max-height:450px" alt="Empty state with all props" src="./images/empty-state-placeholder.png">
+    </div>
+    
+    <div class="codeBlockUsage">
+    <!--<h4>As a placeholder</h4>-->
+    
+    ```typescript
+    import { EmptyState, wrapIcon } from '@pxblue/react-native-components';
+    import _Battery from '@pxblue/icons-svg/battery.svg';
+    const Battery = wrapIcon({ IconClass: _Battery });
+    ...
+    <EmptyState 
+        title={'Nothing Found'} 
+        description={'Not a single thing'}
+        IconClass={Battery} 
+    />
+    ```
+    
+    </div>
+</div>
 ## API
 | Prop Name   | Description                             | Type                                               | Required | Default | Examples                        |
 |-------------|-----------------------------------------|----------------------------------------------------|----------|---------|---------------------------------|
