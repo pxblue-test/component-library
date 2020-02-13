@@ -24,48 +24,6 @@ The EmptyState component is an element that can be used as a placeholder when no
     
     </div>
 </div>
-<div class="codeBlock">
-    <div class="imgWrapper codeBlockImage">
-        <img class="wrappedImg" style="max-height:450px" alt="Empty state with all props" src="./images/empty-state-placeholder.png">
-    </div>
-    
-    <div class="codeBlockUsage">
-    
-        ```typescript
-        import { EmptyState, wrapIcon } from '@pxblue/react-native-components';
-        import _Battery from '@pxblue/icons-svg/battery.svg';
-        const Battery = wrapIcon({ IconClass: _Battery });
-        ...
-        <EmptyState 
-            title={'Nothing Found'} 
-            description={'Not a single thing'}
-            IconClass={Battery} 
-        />
-        ```
-    
-    </div>
-</div>
-<div class="codeBlock">
-    <div class="imgWrapper codeBlockImage">
-        <img class="wrappedImg" style="max-height:450px" alt="Empty state with all props" src="./images/empty-state-placeholder.png">
-    </div>
-    
-    <div class="codeBlockUsage">
-    
-        ```typescript
-        import { EmptyState, wrapIcon } from '@pxblue/react-native-components';
-        import _Battery from '@pxblue/icons-svg/battery.svg';
-        const Battery = wrapIcon({ IconClass: _Battery });
-        ...
-        <EmptyState 
-            title={'Nothing Found'} 
-            description={'Not a single thing'}
-            IconClass={Battery} 
-        />
-        ```
-    
-    </div>
-</div>
 
 
 ## API
