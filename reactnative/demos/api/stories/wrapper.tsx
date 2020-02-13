@@ -1,9 +1,10 @@
 import {StoryFnReactReturnType} from "@storybook/react/dist/client/preview/types";
 import React from 'react';
+import ReactMarkdown from "react-markdown";
 // @ts-ignore
 import iphone from '../assets/iphone-x-flat-buttons.svg';
 
-export const wrap = (img: any): StoryFnReactReturnType => {
+export const wrapImg = (img: any): StoryFnReactReturnType => {
    const imgObj = new Image();
    imgObj.src = img;
    imgObj.onload = () => {
@@ -17,3 +18,9 @@ export const wrap = (img: any): StoryFnReactReturnType => {
       </div>
    </div>
 };
+
+export const wrapMd = (md: any): StoryFnReactReturnType => (
+   <div id={'api-wrapper'}>
+      <ReactMarkdown source={md} />);
+   </div>
+);
