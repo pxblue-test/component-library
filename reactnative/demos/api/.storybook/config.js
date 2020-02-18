@@ -7,37 +7,27 @@ import 'typeface-open-sans';
 import './styles.css';
 import pxblue from './pxblue-theme';
 
-const newViewports = {
-    iPhone5: {
-        name: 'iPhone 5',
-        styles: {
-            width: '320px',
-            height: '568px',
+pxblue.addonNotesTheme = {
+        code: {
+           // color: 'rebeccapurple',
         },
-    },
-    iPhone6: {
-        name: 'iPhone 6',
-        styles: {
-            width: '375px',
-            height: '667px',
+        h1: {
+            color: Colors.blue[500]
         },
-    },
-    iPad: {
-        name: 'iPad',
-        styles: {
-            width: '768px',
-            height: '1024px',
+        h2: {
+            color: Colors.blue[500],
         },
-    },
-};
+        table: {
+            width: '100%'
+        }
+    };
 
 addParameters({
-    viewport: {
-        viewports: newViewports,
-    },
     options: {
         theme: pxblue,
     },
+    notes: 'test'
+
 });
 
 addDecorator((storyFn) => (

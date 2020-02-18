@@ -1356,10 +1356,10 @@
   resolved "https://registry.npmjs.org/@pxblue/icons-mui/-/icons-mui-1.0.18.tgz#dc9d23637fc104dbcc25efd926a8f36259c98489"
   integrity sha512-/NI7GDYCz+dn/qI7W10pZt7x5gGY7IngqwFI2zyLBDMgeawD+ryzvzZ6LOvxjdeht0R8cZFa6ZPZuJjtIcLrjw==
 
-"@pxblue/react-components@2.1.0-beta.0":
-  version "2.1.0-beta.0"
-  resolved "https://registry.npmjs.org/@pxblue/react-components/-/react-components-2.1.0-beta.0.tgz#46593db6e469f9eeb9b8551a382b4fb23fa1e234"
-  integrity sha512-c9EfN33FNBGUr5qOaKJRI8WxYg+YqyGnrha1VZgtIKuEQbWvCE/+9QdpfdMZ2rtTpgVsaajb8OlPZY2lfwM7uQ==
+"@pxblue/react-components@^2.0.0":
+  version "2.1.0"
+  resolved "https://registry.npmjs.org/@pxblue/react-components/-/react-components-2.1.0.tgz#e9a0337e5c8ce63e8ae253b44f9dbdb3e5e5a199"
+  integrity sha512-5vAUhgNjy1StEWcCOhLEYf0O+2ROqI1v8UPQ4pWJ74PjxdVXcCw/2ZJAYtr6uOqVF3rJvncYxukfz0mFQzs54g==
   dependencies:
     "@pxblue/colors" "^2.0.0"
     color "^3.1.2"
